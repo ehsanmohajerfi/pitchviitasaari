@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic Pitch Structure</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        margin: 0;
+    }
+    .canvas-container {
+        border: 4px dotted #666;
+        padding: 25px;
+        background: #ffffff;
+        width: 100%;
+        max-width: 900px;
+        box-sizing: border-box;
+        position: relative;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+    .main-title {
+        font-size: 24px;
+        font-weight: 900;
+        color: #555;
+        letter-spacing: 0.5px;
+        margin: 0;
+    }
+    .box {
+        border: 5px solid #666;
+        padding: 10px;
+        margin-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+    }
+    .box-title {
+        font-weight: 800;
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    textarea {
+        width: 100%;
+        height: 80px;
+        border: none;
+        resize: vertical;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        outline: none;
+        background-color: #fcfcfc;
+    }
+    textarea:focus {
+        background-color: #fff;
+    }
+    .row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    .row .box {
+        flex: 1;
+        margin-bottom: 0;
+    }
+    .row textarea {
+        height: 120px;
+    }
+    .actions {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        background-color: #4a90e2;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #357abd;
+    }
+    .clear-btn {
+        background-color: #e24a4a;
+    }
+    .clear-btn:hover {
+        background-color: #bd3535;
+    }
+    .footer {
+        text-align: right;
+        font-size: 12px;
+        color: #888;
+        margin-top: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="canvas-container">
+    <div class="header">
+        <h1 class="main-title">BASIC PITCH STRUCTURE - PRODUCT/SERVICE</h1>
+    </div>
+
+    <div class="box">
+        <div class="box-title">OPENING</div>
+        <textarea id="opening" placeholder="Hook your audience..."></textarea>
+    </div>
+
+    <div class="row">
+        <div class="box">
+            <div class="box-title">PROBLEM</div>
+            <textarea id="problem" placeholder="What is the pain point?"></textarea>
+        </div>
+        <div class="box">
+            <div class="box-title">SOLUTION</div>
+            <textarea id="solution" placeholder="How do you solve it?"></textarea>
+        </div>
+        <div class="box">
+            <div class="box-title">BENEFIT</div>
+            <textarea id="benefit" placeholder="Why does it matter?"></textarea>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="box-title">BUSINESS MODEL</div>
+        <textarea id="business-model" placeholder="How do you make money?"></textarea>
+    </div>
+
+    <div class="box">
+        <div class="box-title">TEAM & TRACTION</div>
+        <textarea id="team" placeholder="Who are you and what have you achieved?"></textarea>
+    </div>
+
+    <div class="box">
+        <div class="box-title">ASK</div>
+        <textarea id="ask" placeholder="What do you need? (e.g., funding, partnerships)"></textarea>
+    </div>
+
+    <div class="box">
+        <div class="box-title">CLOSING</div>
+        <textarea id="closing" placeholder="Final memorable statement..."></textarea>
+    </div>
+
+    <div class="actions">
+        <button onclick="saveData()">Save Progress</button>
+        <button class="clear-btn" onclick="clearData()">Clear All</button>
+        <button onclick="window.print()" style="background-color: #555;">Print / Save as PDF</button>
+    </div>
+    
+    <div class="footer">https://www.pitchingforlife.com</div>
+</div>
+
+<script>
+    const fields = ['opening', 'problem', 'solution', 'benefit', 'business-model', 'team', 'ask', 'closing'];
+
+    // Load saved data when the page opens
+    window.onload = function() {
+        fields.forEach(field => {
+            const savedValue = localStorage.getItem('pitch_' + field);
+            if (savedValue) {
+                document.getElementById(field).value = savedValue;
+            }
+        });
+    };
+
+    // Save data to the browser's local storage
+    function saveData() {
+        fields.forEach(field => {
+            const value = document.getElementById(field).value;
+            localStorage.setItem('pitch_' + field, value);
+        });
+        alert('Your pitch has been saved to this browser!');
+    }
+
+    // Clear all data
+    function clearData() {
+        if (confirm('Are you sure you want to clear all fields? This cannot be undone.')) {
+            fields.forEach(field => {
+                document.getElementById(field).value = '';
+                localStorage.removeItem('pitch_' + field);
+            });
+        }
+    }
+</script>
+
+</body>
+</html>
